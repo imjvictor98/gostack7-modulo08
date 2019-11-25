@@ -9,14 +9,18 @@ function App() {
     setNewTech('');
   }, [newTech, tech]);
 
+  //componentDidMount
   useEffect(() => {
     const storageTech = localStorage.getItem('tech');
 
-    if (storageTech) {
-      setTech(JSON.parse(storageTech));
-    }
+    if (storageTech) setTech(JSON.parse(storageTech));
+
+    /*componentWillUnmount, just a return. Because component will not exist anymore
+      return () => {};
+    */
   }, []);
 
+  //componentDidUpdate and componentWillUnmount
   useEffect(() => {
     localStorage.setItem('tech', JSON.stringify(tech));
   }, [tech]);
@@ -26,8 +30,8 @@ function App() {
   return (
     <>
       <ul>
-        {tech.map(t => (
-          <li key={t}>{t}</li>
+        {tech.map(techs => (
+          <li key={techs}>{techs}</li>
         ))}
       </ul>
       <strong>Você tem {techSize} tecnologias</strong>
